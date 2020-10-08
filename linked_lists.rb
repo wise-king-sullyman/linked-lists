@@ -5,8 +5,8 @@ class LinkedList
   attr_reader :head, :tail, :size
 
   def initialize(head_value = nil, tail_value = nil)
-    @head = Node.new(head_value, @tail)
     @tail = Node.new(tail_value, nil)
+    @head = Node.new(head_value, @tail)
     @size = 2
   end
 
@@ -59,5 +59,6 @@ end
 list = LinkedList.new('head', 'tail')
 list.prepend(13)
 list.prepend(10)
+list.prepend(7)
 puts list.size
 puts list
