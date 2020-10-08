@@ -16,9 +16,8 @@ class LinkedList
   end
 
   def prepend(value)
-    old_head = Node.new(@head.value, @tail)
-    new_head = Node.new(value, old_head)
-    @head = new_head
+    new_node = Node.new(value, @head.next_node)
+    @head.next_node = new_node
     @size += 1
   end
 
@@ -38,23 +37,27 @@ class LinkedList
 
   def to_s
     node = @head
+    string = ""
     while node
-      print "( #{node.value} ) -> "
+      string += "( #{node.value} ) -> "
       node = node.next_node
     end
+    string += 'nil'
+    string
   end
 end
 
 # Responsible for creating instances of nodes
 class Node
-  attr_reader :value, :next_node
+  attr_accessor :value, :next_node
   def initialize(value = nil, next_node = nil)
     @value = value
     @next_node = next_node
   end
 end
 
-list = LinkedList.new(41, 99)
+list = LinkedList.new('head', 'tail')
 list.prepend(13)
+list.prepend(10)
 puts list.size
 puts list
