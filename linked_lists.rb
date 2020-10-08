@@ -11,7 +11,9 @@ class LinkedList
   end
 
   def append(value)
+    new_node = @tail
     @tail = Node.new(value)
+    new_node.next_node = @tail
     @size += 1
   end
 
@@ -56,9 +58,11 @@ class Node
   end
 end
 
-list = LinkedList.new('head', 'tail')
+list = LinkedList.new('head', 100)
 list.prepend(13)
 list.prepend(10)
 list.prepend(7)
+list.append(150)
+list.append(200)
 puts list.size
 puts list
