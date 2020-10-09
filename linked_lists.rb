@@ -21,7 +21,7 @@ class LinkedList
 
   def prepend(value)
     return if initialize_head_or_tail(@head, value)
-    
+
     new_head = Node.new(value, @head)
     @head = new_head
     @size += 1
@@ -36,7 +36,15 @@ class LinkedList
   end
 
   def at(index)
+    link_index = 0
+    node = @head
+    while node
+      return node if link_index == index
 
+      link_index += 1
+      node = node.next_node
+    end
+    puts "Index #{index} not found; index outside range?"
   end
 
   def pop
@@ -82,3 +90,4 @@ list.prepend(1)
 puts "Tail: #{list.tail.value}, Head: #{list.head.value}"
 puts list.size
 puts list
+puts list.at(8).value
