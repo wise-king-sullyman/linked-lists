@@ -76,7 +76,7 @@ class LinkedList
 
   def to_s
     node = @head
-    string = ""
+    string = ''
     while node
       string += "( #{node.value} ) -> "
       node = node.next_node
@@ -84,7 +84,15 @@ class LinkedList
     string += 'nil'
     string
   end
+
+  def insert_at(value, index)
+    node_before_index = at(index - 1)
+    insert_node = Node.new(value, node_before_index.next_node)
+    node_before_index.next_node = insert_node
+  end
 end
+
+
 
 # Responsible for creating instances of nodes
 class Node
@@ -114,3 +122,6 @@ puts list
 puts list.contains?(15)
 puts list.contains?(7)
 puts list.find(13)
+puts list.find(175)
+list.insert_at(11, 4)
+puts list
