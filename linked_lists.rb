@@ -4,13 +4,18 @@
 class LinkedList
   attr_reader :head, :tail, :size
 
-  def initialize(head_value = nil, tail_value = nil)
-    @tail = Node.new(tail_value, nil)
-    @head = Node.new(head_value, @tail)
-    @size = 2
+  def initialize
+    @tail = Node.new
+    @head = Node.new(nil, @tail)
+    @size = 0
   end
 
   def append(value)
+    unless @tail.value
+      @tail.value = value
+      @size += 1
+      return
+    end
     new_node = @tail
     @tail = Node.new(value)
     new_node.next_node = @tail
@@ -18,8 +23,13 @@ class LinkedList
   end
 
   def prepend(value)
-    new_node = Node.new(value, @head.next_node)
-    @head.next_node = new_node
+    unless @head.value
+      @head.value = value
+      @size += 1
+      return
+    end
+    new_head = Node.new(value, @head)
+    @head = new_head
     @size += 1
   end
 
@@ -58,11 +68,15 @@ class Node
   end
 end
 
-list = LinkedList.new('head', 100)
+list = LinkedList.new
 list.prepend(13)
 list.prepend(10)
 list.prepend(7)
 list.append(150)
 list.append(200)
+list.prepend(5)
+list.append(300)
+list.prepend(1)
+puts "Tail: #{list.tail.value}, Head: #{list.head.value}"
 puts list.size
 puts list
