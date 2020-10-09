@@ -90,9 +90,13 @@ class LinkedList
     insert_node = Node.new(value, node_before_index.next_node)
     node_before_index.next_node = insert_node
   end
+
+  def remove_at(index)
+    node_before_index = at(index - 1)
+    node_to_remove = node_before_index.next_node
+    node_before_index.next_node = node_to_remove.next_node
+  end
 end
-
-
 
 # Responsible for creating instances of nodes
 class Node
@@ -124,4 +128,6 @@ puts list.contains?(7)
 puts list.find(13)
 puts list.find(175)
 list.insert_at(11, 4)
+puts list
+list.remove_at(3)
 puts list
