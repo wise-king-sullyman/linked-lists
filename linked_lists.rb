@@ -53,6 +53,13 @@ class LinkedList
   end
 
   def contains?(value)
+    node = @head
+    while node
+      return true if node.value == value
+
+      node = node.next_node
+    end
+    false
   end
 
   def find(value)
@@ -95,3 +102,5 @@ puts list.at(7).value
 list.pop
 list.pop
 puts list
+puts list.contains?(15)
+puts list.contains?(7)
