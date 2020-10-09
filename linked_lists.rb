@@ -11,11 +11,8 @@ class LinkedList
   end
 
   def append(value)
-    unless @tail.value
-      @tail.value = value
-      @size += 1
-      return
-    end
+    return if initialize_head_or_tail(@tail, value)
+
     new_node = @tail
     @tail = Node.new(value)
     new_node.next_node = @tail
@@ -23,14 +20,19 @@ class LinkedList
   end
 
   def prepend(value)
-    unless @head.value
-      @head.value = value
-      @size += 1
-      return
-    end
+    return if initialize_head_or_tail(@head, value)
+    
     new_head = Node.new(value, @head)
     @head = new_head
     @size += 1
+  end
+
+  def initialize_head_or_tail(variable_name, value)
+    return if variable_name.value
+
+    variable_name.value = value
+    @size += 1
+    true
   end
 
   def at(index)
