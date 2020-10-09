@@ -48,6 +48,7 @@ class LinkedList
   end
 
   def pop
+    at(size - 2).next_node = nil
     @size -= 1
   end
 
@@ -90,4 +91,7 @@ list.prepend(1)
 puts "Tail: #{list.tail.value}, Head: #{list.head.value}"
 puts list.size
 puts list
-puts list.at(8).value
+puts list.at(7).value
+list.pop
+list.pop
+puts list
