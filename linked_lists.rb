@@ -36,13 +36,11 @@ class LinkedList
   end
 
   def at(index)
-    link_index = 0
-    node = @head
-    while node
-      return node if link_index == index
+    list_index = 0
+    node_iterator do |node|
+      return node if list_index == index
 
-      link_index += 1
-      node = node.next_node
+      list_index += 1
     end
     puts "Index #{index} not found; index outside range?"
   end
@@ -53,34 +51,23 @@ class LinkedList
   end
 
   def contains?(value)
-    node = @head
-    while node
-      return true if node.value == value
-
-      node = node.next_node
-    end
+    node_iterator { |node| return true if node.value == value }
     false
   end
 
   def find(value)
-    node = @head
     list_index = 0
-    while node
+    node_iterator do |node|
       return list_index if node.value == value
 
       list_index += 1
-      node = node.next_node
     end
     nil
   end
 
   def to_s
-    node = @head
     string = ''
-    while node
-      string += "( #{node.value} ) -> "
-      node = node.next_node
-    end
+    node_iterator { |node| string += "( #{node.value} ) -> " }
     string += 'nil'
     string
   end
@@ -95,6 +82,14 @@ class LinkedList
     node_before_index = at(index - 1)
     node_to_remove = node_before_index.next_node
     node_before_index.next_node = node_to_remove.next_node
+  end
+
+  def node_iterator
+    node = @head
+    while node
+      yield node
+      node = node.next_node
+    end
   end
 end
 
