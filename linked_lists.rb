@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'pry'
 # Responsible for management of an instance of a linked list
 class LinkedList
   attr_reader :head, :tail, :size
@@ -78,12 +78,14 @@ class LinkedList
     node_before_index = at(index - 1)
     insert_node = Node.new(value, node_before_index.next_node)
     node_before_index.next_node = insert_node
+    @size += 1
   end
 
   def remove_at(index)
     node_before_index = at(index - 1)
     node_to_remove = node_before_index.next_node
     node_before_index.next_node = node_to_remove.next_node
+    @size -= 1
   end
 
   def node_iterator
@@ -105,6 +107,7 @@ class Node
 end
 
 list = LinkedList.new
+binding.pry
 list.prepend(13)
 list.prepend(10)
 list.prepend(7)
