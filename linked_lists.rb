@@ -46,7 +46,9 @@ class LinkedList
   end
 
   def pop
-    at(size - 2).next_node = nil
+    second_to_last_node = at(size - 2)
+    second_to_last_node.next_node = nil
+    @tail = second_to_last_node
     @size -= 1
   end
 
